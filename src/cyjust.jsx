@@ -241,28 +241,28 @@ const ProductCard = ({ product }) => {
 const HomePage = () => {
   const heroSlides = [
     {
-      image:  src={image1},
+      image:  image1,
       title: 'Quality Products',
       subtitle: 'Shipped to Your Doorstep',
       buttonText: 'Shop Now',
       buttonColor: 'bg-white text-purple-600 hover:bg-purple-50'
     },
     {
-      image:  src={image3},
+      image:  image3,
       title: 'Best Deals Daily',
       subtitle: 'Up to 70% Off on Selected Items',
       buttonText: 'View Discounts',
       buttonColor: 'bg-purple-600 text-white hover:bg-purple-700'
     },
     {
-      image:  src={image2},
+      image:  image2,
       title: 'Free Delivery',
       subtitle: 'On orders above ₦10,000 within Lagos',
       buttonText: 'Start Shopping',
       buttonColor: 'bg-white text-purple-600 hover:bg-purple-50'
     },
     {
-      image:  src={image5},
+      image:  image5,
       title: '24/7 Support',
       subtitle: 'We\'re always here to help you',
       buttonText: 'Contact Us',
