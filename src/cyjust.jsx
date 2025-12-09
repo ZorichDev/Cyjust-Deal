@@ -9,12 +9,15 @@ import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin
 
 // Product data
 const featuredProducts = [
-  { id: 1, name: 'Wireless Earbuds Pro', price: 15999, originalPrice: 35000, discount: 54, image: 'earbuds', rating: 4.8, reviews: 234, inStock: true },
-  { id: 2, name: 'Smart Watch Series 6', price: 25999, originalPrice: 45000, discount: 42, image: 'smartwatch', rating: 4.6, reviews: 189, inStock: true },
-  { id: 3, name: 'Power Bank 20000mAh', price: 8999, originalPrice: 18000, discount: 50, image: 'powerbank', rating: 4.7, reviews: 456, inStock: true },
-  { id: 4, name: 'Bluetooth Speaker', price: 12499, originalPrice: 25000, discount: 50, image: 'speaker', rating: 4.5, reviews: 178, inStock: true },
-  { id: 5, name: 'Phone Camera Lens Kit', price: 6999, originalPrice: 15000, discount: 53, image: 'lens', rating: 4.4, reviews: 92, inStock: true },
-  { id: 6, name: 'LED Desk Lamp', price: 4999, originalPrice: 12000, discount: 58, image: 'lamp', rating: 4.6, reviews: 145, inStock: true },
+  { id: 1, name: 'Flyers', price: 15999,  discount: 54, image: 'Flyers', rating: 4.8, reviews: 234, inStock: true },
+  { id: 2, name: 'Logo Design', price: 25999,  discount: 42, image: 'Logo Design', rating: 4.6, reviews: 189, inStock: true },
+  { id: 3, name: 'Branding', price: 8999,  discount: 50, image: 'Branding', rating: 4.7, reviews: 456, inStock: true },
+  { id: 4, name: 'Stamp/Seal', price: 12499, discount: 50, image: 'Stamp/Seal', rating: 4.5, reviews: 178, inStock: true },
+  { id: 5, name: 'Card', price: 6999,  discount: 53, image: 'Card', rating: 4.4, reviews: 92, inStock: true },
+  { id: 6, name: 'Package Bag Branding', price: 4999,  discount: 58, image: 'Package Bag Branding', rating: 4.6, reviews: 145, inStock: true },
+  { id: 6, name: 'Dairy Branding', price: 4999,  discount: 58, image: 'Dairy Branding', rating: 4.6, reviews: 145, inStock: true },
+  { id: 6, name: 'Pen Branding', price: 4999,  discount: 58, image: 'Pen Branding', rating: 4.6, reviews: 145, inStock: true },
+
 ];
 
 const services = [
