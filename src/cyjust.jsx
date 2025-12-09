@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import logo from './img/footer-logo.png';
+import image1 from './img/1.jpg';
+import image2 from './img/2.jpg';
+import image3 from './img/3.jpg';
+import image4 from './img/4.jpg';
+import image5 from './img/5.jpg';
 import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, Tag, CheckCircle, Star, ChevronRight } from 'lucide-react';
 
 // Product data
@@ -236,28 +241,28 @@ const ProductCard = ({ product }) => {
 const HomePage = () => {
   const heroSlides = [
     {
-      image: '/src/img/3.jpg',
+      image:  src={image1},
       title: 'Quality Products',
       subtitle: 'Shipped to Your Doorstep',
       buttonText: 'Shop Now',
       buttonColor: 'bg-white text-purple-600 hover:bg-purple-50'
     },
     {
-      image: '/src/img/1.jpg',
+      image:  src={image3},
       title: 'Best Deals Daily',
       subtitle: 'Up to 70% Off on Selected Items',
       buttonText: 'View Discounts',
       buttonColor: 'bg-purple-600 text-white hover:bg-purple-700'
     },
     {
-      image: '/src/img/2.jpg',
+      image:  src={image2},
       title: 'Free Delivery',
       subtitle: 'On orders above ₦10,000 within Lagos',
       buttonText: 'Start Shopping',
       buttonColor: 'bg-white text-purple-600 hover:bg-purple-50'
     },
     {
-      image: '/src/img/5.jpg',
+      image:  src={image5},
       title: '24/7 Support',
       subtitle: 'We\'re always here to help you',
       buttonText: 'Contact Us',
