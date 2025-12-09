@@ -70,7 +70,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
                 <Phone className="w-3 h-3" />
-                +234 906 634 5037
+                +23490692465777
               </span>
               <span className="hidden md:flex items-center gap-1">
                 <Mail className="w-3 h-3" />
@@ -768,7 +768,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-800 dark:text-white mb-1">Call Us</h3>
-                    <p className="text-gray-600 dark:text-gray-400">+234 906 634 5037</p>
+                    <p className="text-gray-600 dark:text-gray-400">+23490692465777</p>
                     <p className="text-gray-600 dark:text-gray-400">+234 801 234 5678</p>
                   </div>
                 </div>
@@ -953,7 +953,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-gray-400">
                 <Phone className="w-4 h-4" />
-                <span>+234 906 634 5037</span>
+                <span>+23490692465777</span>
               </li>
               <li className="flex items-center gap-2 text-gray-400">
                 <Mail className="w-4 h-4" />
