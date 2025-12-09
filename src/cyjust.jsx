@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logo from './img/footer-logo.png';
 import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, Tag, CheckCircle, Star, ChevronRight } from 'lucide-react';
 
 // Product data
@@ -80,7 +81,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
           {/* Logo */}
           <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2">
             <div className="w-10 h-10 bg-linear-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
-              <Package className="w-6 h-6 text-white" />
+              <img src={logo} alt="CyJust Deal Logo"  />
             </div>
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">CyJust Deal</h1>
@@ -885,7 +886,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-linear-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
-                <Package className="w-5 h-5 text-white" />
+                <img src={logo} alt="CyJust Deal Logo"  />
               </div>
               <span className="text-xl font-bold">CyJust Deal</span>
             </div>
