@@ -267,6 +267,13 @@ const HomePage = () => {
       subtitle: 'We\'re always here to help you',
       buttonText: 'Contact Us',
       buttonColor: 'bg-purple-600 text-white hover:bg-purple-700'
+    },
+     {
+      image:  image4,
+      title: 'Free Delivery',
+      subtitle: 'On orders above ₦10,000 within Lagos',
+      buttonText: 'Start Shopping',
+      buttonColor: 'bg-white text-purple-600 hover:bg-purple-50'
     }
   ];
 
