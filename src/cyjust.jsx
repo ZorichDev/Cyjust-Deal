@@ -129,7 +129,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
             </button>
             <button 
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95"
-              onClick={() => window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank')}
+              onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank')}
             >
               Order on WhatsApp
             </button>
@@ -179,7 +179,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
               <button 
                 className="mt-4 px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-300 active:scale-95"
                 onClick={() => {
-                  window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank');
+                  window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank');
                   setMobileMenuOpen(false);
                 }}
               >
@@ -197,7 +197,7 @@ const ProductCard = ({ product }) => {
   const orderOnWhatsApp = () => {
     const message = `Hello CyJust Deal! I want to order:\n\n*${product.name}*\nPrice: ₦${product.price.toLocaleString()}\n\nPlease contact me regarding this order.`;
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/2349066345037?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/2349069246577?text=${encodedMessage}`, '_blank');
   };
 
   return (
@@ -351,7 +351,7 @@ const HomePage = () => {
                     </p>
                     <div className="flex flex-wrap gap-4">
                       <button 
-                        onClick={() => window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20shop%20today`, '_blank')}
+                        onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20shop%20today`, '_blank')}
                         className={`px-8 py-4 rounded-lg font-bold transition-all duration-300 active:scale-95 ${slide.buttonColor}`}
                       >
                         {slide.buttonText}
@@ -436,7 +436,7 @@ const ProductsPage = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Products</h1>
           <p className="text-xl max-w-3xl mx-auto">Browse our collection of quality products</p>
           <button 
-            onClick={() => window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20browse%20products`, '_blank')}
+            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20browse%20products`, '_blank')}
             className="mt-8 px-8 py-4 bg-white text-purple-600 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 active:scale-95"
           >
             Browse on WhatsApp
@@ -597,7 +597,7 @@ const ServicesPage = () => {
             Join thousands of satisfied customers who trust CyJust Deal for their shopping needs
           </p>
           <button 
-            onClick={() => window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20start%20shopping`, '_blank')}
+            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20start%20shopping`, '_blank')}
             className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-all duration-300 active:scale-95"
           >
             Start Shopping
@@ -658,7 +658,7 @@ const ContactPage = () => {
   const contactOnWhatsApp = () => {
     const message = `Hello CyJust Deal! I want to contact you regarding:\n\nName: ${formData.name || 'Not provided'}\nEmail: ${formData.email || 'Not provided'}\nPhone: ${formData.phone || 'Not provided'}\nMessage: ${formData.message || 'No message'}`;
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/2349066345037?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/2349069246577?text=${encodedMessage}`, '_blank');
   };
 
   return (
@@ -729,7 +729,7 @@ const ContactPage = () => {
                         Contact Now
                       </button>
                       <button 
-                        onClick={() => window.open(`https://wa.me/2349066345037?text=Hello%20CyJust%20Deal!%20I%20want%20to%20contact%20you`, '_blank')}
+                        onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20contact%20you`, '_blank')}
                         className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-semibold transition-all active:scale-95"
                       >
                         WhatsApp Us
