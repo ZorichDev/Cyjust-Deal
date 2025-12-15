@@ -14,7 +14,7 @@ import image2 from './img/2.jpg';
 import image3 from './img/3.jpg';
 import image4 from './img/4.jpg';
 import image5 from './img/5.jpg';
-import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, Tag, CheckCircle, Star, ChevronRight } from 'lucide-react';
+import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, Tag, CheckCircle, Star, ChevronRight, Globe, Code, Zap, Users, Award, TrendingUp, Headphones, CreditCard, ShoppingBag, Smartphone, Palette } from 'lucide-react';
 
 // Product data
 const featuredProducts = [
@@ -29,7 +29,7 @@ const featuredProducts = [
     inStock: true 
   },
   { 
-    id: 1, 
+    id: 2, 
     name: 'Logo Design', 
     price: 15999, 
     discount: 54, 
@@ -39,7 +39,7 @@ const featuredProducts = [
     inStock: true 
   },
    { 
-    id: 1, 
+    id: 3, 
     name: 'Branding', 
     price: 15999, 
     discount: 54, 
@@ -49,7 +49,7 @@ const featuredProducts = [
     inStock: true 
   },
   { 
-    id: 1, 
+    id: 4, 
     name: 'Stamp/Seal', 
     price: 15999, 
     discount: 54, 
@@ -135,22 +135,23 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white dark:bg-gray-900 shadow-lg' : 'bg-white dark:bg-gray-900 shadow-md'}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-white dark:bg-gray-900 shadow-md'}`}>
       {/* Top Bar */}
-      <div className="bg-blue-600 dark:bg-blue-800 text-white py-2">
+      <div className="bg-linear-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-900 text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center text-xs md:text-sm">
             <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1 hover:text-blue-100 transition-colors">
                 <Phone className="w-3 h-3" />
-                09069246577              </span>
-              <span className="hidden md:flex items-center gap-1">
+                09069246577
+              </span>
+              <span className="hidden md:flex items-center gap-1 hover:text-blue-100 transition-colors">
                 <Mail className="w-3 h-3" />
                 info@cyjustdeal.com
               </span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="hidden md:inline">Free delivery above ₦50,000</span>
+              <span className="hidden md:inline animate-pulse">🎁 Free delivery above ₦50,000</span>
             </div>
           </div>
         </div>
@@ -159,12 +160,18 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-              <img src={logo} alt="CyJust Deal Logo"  />
+          <button 
+            onClick={() => {
+              setCurrentPage('home');
+              window.history.pushState({ page: 'home' }, '', '/');
+            }} 
+            className="flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+          >
+            <div className="w-10 h-10 bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-lg flex items-center justify-center">
+              <img src={logo} alt="CyJust Deal Logo" className="w-8 h-8" />
             </div>
-            <div>
-              <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">CYJUST DEAL</h1>
+            <div className="text-left">
+              <h1 className="text-xl md:text-2xl font-bold bg-linear-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent">CYJUST DEAL</h1>
               <p className="text-xs text-gray-600 dark:text-gray-400">Best Deals Daily</p>
             </div>
           </button>
@@ -174,14 +181,20 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
             {navItems.map((item) => (
               <button
                 key={item.page}
-                onClick={() => setCurrentPage(item.page)}
-                className={`text-sm font-medium transition-colors ${
+                onClick={() => {
+                  setCurrentPage(item.page);
+                  window.history.pushState({ page: item.page }, '', `/#${item.page}`);
+                }}
+                className={`relative text-sm font-medium transition-all duration-300 group ${
                   currentPage === item.page
                     ? 'text-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
                 }`}
               >
                 {item.name}
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full ${
+                  currentPage === item.page ? 'w-full' : ''
+                }`}></span>
               </button>
             ))}
           </div>
@@ -190,7 +203,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
           <div className="hidden lg:flex items-center gap-4">
             <button 
               onClick={toggleTheme}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300 active:scale-95"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300 active:scale-95 hover:shadow-md"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? (
@@ -200,10 +213,13 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
               )}
             </button>
             <button 
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95"
+              className="px-4 py-2 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg flex items-center gap-2"
               onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank')}
             >
-              Order on WhatsApp
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.438 9.88-9.888 9.88m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
+              </svg>
+              Order Now
             </button>
           </div>
 
@@ -230,7 +246,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t dark:border-gray-700 pt-4">
+          <div className="lg:hidden mt-4 pb-4 border-t dark:border-gray-700 pt-4 animate-slideDown">
             <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
                 <button
@@ -238,10 +254,11 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
                   onClick={() => {
                     setCurrentPage(item.page);
                     setMobileMenuOpen(false);
+                    window.history.pushState({ page: item.page }, '', `/#${item.page}`);
                   }}
-                  className={`text-left px-4 py-2 rounded-lg transition ${
+                  className={`text-left px-4 py-2 rounded-lg transition-all duration-300 ${
                     currentPage === item.page
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                      ? 'bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 text-blue-600 dark:text-blue-400'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
@@ -249,7 +266,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
                 </button>
               ))}
               <button 
-                className="mt-4 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 active:scale-95"
+                className="mt-4 px-4 py-3 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all duration-300 active:scale-95 shadow-md"
                 onClick={() => {
                   window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20make%20an%20inquiry`, '_blank');
                   setMobileMenuOpen(false);
@@ -273,14 +290,14 @@ const ProductCard = ({ product }) => {
   };
 
    return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] group">
-      {/* Image Section - FIXED */}
+    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] group hover:-translate-y-2">
+      {/* Image Section */}
       <div className="relative bg-gray-50 dark:bg-gray-700 aspect-square overflow-hidden">
         {product.image ? (
           <img 
             src={product.image} 
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center relative">
@@ -290,19 +307,21 @@ const ProductCard = ({ product }) => {
         )}
         
         {product.discount > 0 && (
-          <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+          <div className="absolute top-3 left-3 bg-linear-to-r from-red-500 to-red-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
             -{product.discount}%
           </div>
         )}
+        
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
      {/* Product Info */}
-<div className="p-4">
-  <h3 className="font-semibold text-sm text-gray-800 dark:text-white mb-2 line-clamp-2 min-h-10">
+<div className="p-5">
+  <h3 className="font-bold text-gray-800 dark:text-white mb-2 line-clamp-2 min-h-12 text-sm">
     {product.name}
   </h3>
 
-  <div className="flex items-center gap-1 mb-3">
+  <div className="flex items-center gap-1 mb-4">
     {[...Array(5)].map((_, i) => (
       <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
     ))}
@@ -311,334 +330,27 @@ const ProductCard = ({ product }) => {
     </span>
   </div>
 
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col">
+      <span className="text-lg font-bold text-gray-800 dark:text-white">₦{product.price.toLocaleString()}</span>
+      {product.discount > 0 && (
+        <span className="text-xs text-gray-500 dark:text-gray-400 line-through">
+          ₦{(product.price / (1 - product.discount/100)).toLocaleString()}
+        </span>
+      )}
+    </div>
+  </div>
+
   <button
     onClick={orderOnWhatsApp}
-    className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+    className="w-full py-2.5 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
   >
     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..." />
     </svg>
-    Order on WhatsApp
+    Order Now
   </button>
 </div>
-    </div>
-  );
-};
-
-const home = () => {
-  const heroSlides = [
-    {
-      image:  image1,
-      title: 'Quality Products',
-      subtitle: 'Shipped to Your Doorstep',
-      buttonText: 'Shop Now',
-      buttonColor: 'bg-white text-blue-600 hover:bg-gray-50'
-    },
-    {
-      image:  image3,
-      title: 'Best Deals Daily',
-      subtitle: 'Up to 70% Off on Selected Items',
-      buttonText: 'View Discounts',
-      buttonColor: 'bg-blue-600 text-white hover:bg-blue-700'
-    },
-    {
-      image:  image2,
-      title: 'Free Delivery',
-      subtitle: 'On orders above ₦50,000 within Lagos',
-      buttonText: 'Start Shopping',
-      buttonColor: 'bg-white text-blue-600 hover:bg-gray-50'
-    },
-    {
-      image:  image5,
-      title: '24/7 Support',
-      subtitle: 'We\'re always here to help you',
-      buttonText: 'Contact Us',
-      buttonColor: 'bg-blue-600 text-white hover:bg-blue-700'
-    },
-     {
-      image:  image4,
-      title: 'Free Delivery',
-      subtitle: 'On orders above ₦50,000 within Lagos',
-      buttonText: 'Start Shopping',
-      buttonColor: 'bg-white text-blue-600 hover:bg-gray-50'
-    }
-  ];
-
-  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [currentHeroSlide]);
-
-  return (
-    <>
-      {/* Hero Section with Slider */}
-      <section className="relative h-[80vh] min-h-[500px] overflow-hidden">
-        {/* Background Slider */}
-        <div className="absolute inset-0">
-          {heroSlides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                index === currentHeroSlide
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-110'
-              }`}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${slide.image})` }}
-              />
-              <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40"></div>
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
-            </div>
-          ))}
-        </div>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentHeroSlide(index)}
-              className={`h-1 transition-all duration-300 rounded-full ${
-                index === currentHeroSlide
-                  ? 'w-8 bg-white'
-                  : 'w-4 bg-white/50 hover:bg-white/80'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Content */}
-        <div className="relative h-full flex items-center">
-          <div className="container mx-auto px-4 md:px-8">
-            <div className="max-w-2xl ml-auto">
-              <div className="overflow-hidden relative h-64">
-                {heroSlides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={`transition-all duration-1000 ${
-                      index === currentHeroSlide
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-10 absolute'
-                    }`}
-                  >
-                    <h1 className="text-4xl md:text-7xl font-bold text-white mb-6">
-                      {slide.title}
-                    </h1>
-                    <p className="text-xl md:text-3xl text-white/90 mb-8">
-                      {slide.subtitle}
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                      <button 
-                        onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20shop%20today`, '_blank')}
-                        className={`px-8 py-4 rounded-lg font-bold transition-all duration-300 active:scale-95 ${slide.buttonColor}`}
-                      >
-                        {slide.buttonText}
-                      </button>
-                      <button 
-                        onClick={() => window.scrollTo({ top: 650, behavior: 'smooth' })}
-                        className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition-all duration-300 active:scale-95"
-                      >
-                        View Products
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {/* Reviews */}
-              <div className="mt-12 flex items-center gap-3">
-                <div className="flex -space-x-3">
-                  {[...Array(4)].map((_, i) => (
-                    <div key={i} className="w-12 h-12 rounded-full bg-white/20 border-2 border-white"></div>
-                  ))}
-                </div>
-                <div>
-                  <p className="text-white text-lg font-semibold">4.8/5 ★★★★★</p>
-                  <p className="text-white/80 text-sm">Based on 500+ reviews</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-16 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Featured Products</h2>
-              <div className="w-20 h-1 bg-blue-600 rounded-full"></div>
-            </div>
-            <button 
-              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-              className="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-2 transition-all duration-300 active:scale-95"
-            >
-              See all products <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <service.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="font-bold text-gray-800 dark:text-white mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  );
-};
-
-const ProductsPage = () => {
-  return (
-    <div className="bg-white dark:bg-gray-900 min-h-screen">
-      {/* Hero with Background Image */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${image2})` }}
-        >
-          <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40"></div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Our Products</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10">
-            Browse our collection of quality products with the best deals
-          </p>
-          <button 
-            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20browse%20products`, '_blank')}
-            className="px-10 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
-          >
-            Browse on WhatsApp
-          </button>
-        </div>
-      </section>
-
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-const AboutPage = () => {
-  return (
-    <div className="bg-white dark:bg-gray-900">
-      {/* Hero with Background Image */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${image1})` }}
-        >
-          <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-blue-800/70 to-blue-700/50"></div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">About CyJust Deal</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
-            Your trusted partner for quality products at unbeatable prices
-          </p>
-        </div>
-      </section>
-
-      {/* Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Who We Are</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                At Cyjust Deal, we are your dedicated partners in digital branding and development, committed to crafting powerful 
-                digital experiences that elevate your brand. Our mission is to empower brands through creative digital solutions, 
-                leveraging our expertise in graphic design, and branding to turn your ideas into impactful digital realities.
-                 Whether you're looking to establish a strong online presence or refresh your brand identity, our team of 
-                 professionals is here to guide you every step of the way. We help you stand out in the digital world with 
-                 custom-tailored services that resonate with your target audience, ensuring your brand not only meets but exceeds 
-                 its digital potential. Choose us for our proven expertise in branding, web development, and design, and let us 
-                 transform your vision into a compelling digital experience..
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                our team of professionals is here to guide you every step of the way. Our mission is to help you stand out in the 
-                digital world with creative, custom-tailored services that resonate with your target audience.
-              </p>
-            </div>
-
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Our Values</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  { title: 'Quality First', desc: 'We never compromise on quality or authenticity. Every project is delivered with precision and excellence.' },
-                  { title: 'Customer Focus', desc: 'Your satisfaction is our top priority. We listen, understand, and create solutions that truly meet your needs.' },
-                  { title: 'Transparency', desc: 'We believe in honest pricing, clear communication, and complete openness throughout every stage of your project.' },
-                  { title: 'Innovation', desc: 'We continuously improve our services, embracing new ideas and technologies to enhance your digital experience.' }
-                ].map((value, index) => (
-                  <div key={index} className="flex gap-4">
-                    <CheckCircle className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-bold text-gray-800 dark:text-white mb-2">{value.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">{value.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Why Choose Us?</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
-                  <p className="text-gray-600 dark:text-gray-400">Products Available</p>
-                </div>
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">50K+</div>
-                  <p className="text-gray-600 dark:text-gray-400">Happy Customers</p>
-                </div>
-                <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">4.8★</div>
-                  <p className="text-gray-600 dark:text-gray-400">Average Rating</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
@@ -675,17 +387,16 @@ const HomePage = () => {
     },
      {
       image:  image4,
-      title: 'Free Delivery',
-      subtitle: 'On orders above ₦50,000 within Lagos',
-      buttonText: 'Start Shopping',
+      title: 'Premium Branding',
+      subtitle: 'Professional branding solutions for your business',
+      buttonText: 'Explore Services',
       buttonColor: 'bg-white text-blue-600 hover:bg-gray-50'
     }
   ];
 
   // Create an array of customer images for the avatars
-  // You can replace these with actual customer images or use the product images
   const customerImages = [
-    flyersImage5,  // Using existing images for demo
+    flyersImage5,
     flyersImage2,
     flyersImage3,
     flyersImage
@@ -703,7 +414,7 @@ const HomePage = () => {
   return (
     <>
       {/* Hero Section with Slider */}
-      <section className="relative h-[80vh] min-h-[500px] overflow-hidden">
+      <section className="relative h-[85vh] min-h-[600px] overflow-hidden">
         {/* Background Slider */}
         <div className="absolute inset-0">
           {heroSlides.map((slide, index) => (
@@ -731,9 +442,9 @@ const HomePage = () => {
             <button
               key={index}
               onClick={() => setCurrentHeroSlide(index)}
-              className={`h-1 transition-all duration-300 rounded-full ${
+              className={`h-1.5 transition-all duration-300 rounded-full ${
                 index === currentHeroSlide
-                  ? 'w-8 bg-white'
+                  ? 'w-8 bg-white shadow-lg'
                   : 'w-4 bg-white/50 hover:bg-white/80'
               }`}
             />
@@ -743,8 +454,8 @@ const HomePage = () => {
         {/* Content */}
         <div className="relative h-full flex items-center">
           <div className="container mx-auto px-4 md:px-8">
-            <div className="max-w-2xl ml-auto">
-              <div className="overflow-hidden relative h-64">
+            <div className="max-w-2xl ml-auto animate-fadeIn">
+              <div className="overflow-hidden relative h-72">
                 {heroSlides.map((slide, index) => (
                   <div
                     key={index}
@@ -754,22 +465,27 @@ const HomePage = () => {
                         : 'opacity-0 translate-y-10 absolute'
                     }`}
                   >
-                    <h1 className="text-4xl md:text-7xl font-bold text-white mb-6">
+                    <h1 className="text-5xl md:text-8xl font-bold text-white mb-6 leading-tight">
                       {slide.title}
                     </h1>
-                    <p className="text-xl md:text-3xl text-white/90 mb-8">
+                    <p className="text-2xl md:text-4xl text-white/90 mb-10 leading-relaxed">
                       {slide.subtitle}
                     </p>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-6">
                       <button 
                         onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20shop%20today`, '_blank')}
-                        className={`px-8 py-4 rounded-lg font-bold transition-all duration-300 active:scale-95 ${slide.buttonColor}`}
+                        className={`px-10 py-5 rounded-xl font-bold transition-all duration-300 active:scale-95 shadow-xl hover:shadow-2xl text-lg ${slide.buttonColor}`}
                       >
                         {slide.buttonText}
                       </button>
                       <button 
-                        onClick={() => window.scrollTo({ top: 650, behavior: 'smooth' })}
-                        className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition-all duration-300 active:scale-95"
+                        onClick={() => {
+                          const element = document.querySelector('#featured-products');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        className="px-10 py-5 bg-transparent border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
                       >
                         View Products
                       </button>
@@ -779,12 +495,12 @@ const HomePage = () => {
               </div>
               
               {/* Reviews with Images */}
-              <div className="mt-12 flex items-center gap-3">
+              <div className="mt-16 flex items-center gap-6">
                 <div className="flex -space-x-3">
                   {customerImages.map((img, i) => (
                     <div 
                       key={i} 
-                      className="w-12 h-12 rounded-full border-2 border-white overflow-hidden relative z-10 hover:scale-110 transition-transform duration-300"
+                      className="w-14 h-14 rounded-full border-3 border-white overflow-hidden relative z-10 hover:scale-110 transition-transform duration-300 shadow-lg"
                       style={{ zIndex: 10 - i }}
                     >
                       <img 
@@ -796,8 +512,15 @@ const HomePage = () => {
                   ))}
                 </div>
                 <div>
-                  <p className="text-white text-lg font-semibold">4.8/5 ★★★★★</p>
-                  <p className="text-white/80 text-sm">Based on 500+ reviews</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-white text-2xl font-bold">4.8/5</p>
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-white/80 text-sm mt-1">Based on 500+ reviews</p>
                 </div>
               </div>
             </div>
@@ -805,23 +528,53 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      {/* Stats Section */}
+      <section className="py-16 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: Package, value: '10K+', label: 'Products' },
+              { icon: Users, value: '50K+', label: 'Customers' },
+              { icon: Award, value: '4.8★', label: 'Rating' },
+              { icon: Truck, value: '24/7', label: 'Delivery' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="w-16 h-16 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="text-4xl font-bold text-gray-800 dark:text-white mb-2">{stat.value}</div>
+                <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section id="featured-products" className="py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Featured Products</h2>
-              <div className="w-20 h-1 bg-blue-600 rounded-full"></div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">Featured Products</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full"></div>
+              <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl">
+                Discover our premium collection of branding and marketing materials
+              </p>
             </div>
             <button 
-              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-              className="text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-2 transition-all duration-300 active:scale-95"
+              onClick={() => {
+                const element = document.querySelector('#featured-products');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="mt-6 md:mt-0 px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg flex items-center gap-2"
             >
-              See all products <ChevronRight className="w-4 h-4" />
+              Explore All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -830,22 +583,288 @@ const HomePage = () => {
       </section>
 
       {/* Services */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 bg-linear-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Why Choose Us</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-lg">
+              We deliver excellence through our comprehensive range of services
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <service.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
+                <div className="w-20 h-20 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <service.icon className="w-10 h-10 text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
                 </div>
-                <h3 className="font-bold text-gray-800 dark:text-white mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{service.description}</p>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4 text-center">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-center leading-relaxed">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-linear-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-900">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Transform Your Brand?</h2>
+            <p className="text-xl text-white/90 mb-10">
+              Join thousands of satisfied customers who trust us with their branding needs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button 
+                onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20discuss%20a%20project`, '_blank')}
+                className="px-12 py-5 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-lg"
+              >
+                Start a Project
+              </button>
+              <button 
+                onClick={() => {
+                  const element = document.querySelector('#featured-products');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="px-12 py-5 bg-transparent border-3 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all duration-300 active:scale-95 shadow-xl hover:shadow-2xl text-lg"
+              >
+                Browse Products
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
+  );
+};
+
+const ProductsPage = () => {
+  return (
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
+      {/* Hero with Background Image */}
+      <section className="relative py-32 md:py-48 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${image2})` }}
+        >
+          <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/70 to-black/60"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 text-center animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">Our Premium Products</h1>
+          <p className="text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed">
+            Discover our exclusive collection of branding and marketing solutions
+          </p>
+          <button 
+            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20browse%20your%20products`, '_blank')}
+            className="px-12 py-5 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-lg"
+          >
+            Browse Catalog
+          </button>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-20 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Product Categories</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Print Materials',
+                icon: Package,
+                items: ['Flyers', 'Business Cards', 'Brochures', 'Catalogs'],
+                color: 'from-blue-500 to-blue-600'
+              },
+              {
+                title: 'Branding',
+                icon: Palette,
+                items: ['Logo Design', 'Brand Identity', 'Stationery', 'Packaging'],
+                color: 'from-purple-500 to-purple-600'
+              },
+              {
+                title: 'Promotional Items',
+                icon: ShoppingBag,
+                items: ['Pens', 'Mugs', 'T-shirts', 'Corporate Gifts'],
+                color: 'from-green-500 to-green-600'
+              }
+            ].map((category, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
+                  <category.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">{category.title}</h3>
+                <ul className="space-y-3">
+                  {category.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                      <CheckCircle className="w-5 h-5 text-blue-500" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const AboutPage = () => {
+  return (
+    <div className="bg-white dark:bg-gray-900">
+      {/* Hero with Background Image */}
+      <section className="relative py-32 md:py-48 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${image1})` }}
+        >
+          <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-blue-800/80 to-blue-700/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 text-center animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">About CyJust Deal</h1>
+          <p className="text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            Your trusted partner for digital branding and development solutions
+          </p>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-8">Who We Are</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mb-8"></div>
+              <div className="space-y-6">
+                <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                  At Cyjust Deal, we are your dedicated partners in digital branding and development, committed to crafting powerful 
+                  digital experiences that elevate your brand. Our mission is to empower brands through creative digital solutions, 
+                  leveraging our expertise in graphic design and branding to turn your ideas into impactful digital realities.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Whether you're looking to establish a strong online presence or refresh your brand identity, our team of 
+                  professionals is here to guide you every step of the way. We help you stand out in the digital world with 
+                  custom-tailored services that resonate with your target audience, ensuring your brand not only meets but exceeds 
+                  its digital potential.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Choose us for our proven expertise in branding, web development, and design, and let us 
+                  transform your vision into a compelling digital experience.
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-8">Our Values</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mb-8"></div>
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  { 
+                    title: 'Quality First', 
+                    desc: 'We never compromise on quality or authenticity. Every project is delivered with precision and excellence.',
+                    icon: Award
+                  },
+                  { 
+                    title: 'Customer Focus', 
+                    desc: 'Your satisfaction is our top priority. We listen, understand, and create solutions that truly meet your needs.',
+                    icon: Users
+                  },
+                  { 
+                    title: 'Transparency', 
+                    desc: 'We believe in honest pricing, clear communication, and complete openness throughout every stage of your project.',
+                    icon: Shield
+                  },
+                  { 
+                    title: 'Innovation', 
+                    desc: 'We continuously improve our services, embracing new ideas and technologies to enhance your digital experience.',
+                    icon: Zap
+                  }
+                ].map((value, index) => (
+                  <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl flex items-center justify-center mb-6">
+                      <value.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">{value.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{value.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-8">Why Choose Us?</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mb-8"></div>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="text-5xl font-bold bg-linear-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">10K+</div>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">Products Available</p>
+                </div>
+                <div className="text-center bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="text-5xl font-bold bg-linear-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">50K+</div>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">Happy Customers</p>
+                </div>
+                <div className="text-center bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="text-5xl font-bold bg-linear-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">4.8★</div>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">Average Rating</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Our Expertise</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: 'Graphic Design', desc: 'Creative visuals that communicate your brand message', icon: Palette },
+              { title: 'Web Development', desc: 'Modern, responsive websites that convert visitors', icon: Code },
+              { title: 'Digital Marketing', desc: 'Strategies to grow your online presence', icon: TrendingUp }
+            ].map((expertise, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <expertise.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">{expertise.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{expertise.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
@@ -855,83 +874,89 @@ const ServicesPage = () => {
       icon: Truck,
       title: 'Fast & Reliable Delivery',
       description: 'We offer same-day delivery within Lagos and 2-5 business days nationwide. Free delivery on orders above ₦50,000 within Lagos.',
-      features: ['Same-day delivery in Lagos', 'Nationwide coverage', 'Order tracking', 'Secure packaging']
+      features: ['Same-day delivery in Lagos', 'Nationwide coverage', 'Order tracking', 'Secure packaging'],
+      color: 'from-blue-500 to-blue-600'
     },
     {
       icon: Shield,
       title: 'Secure Payment Options',
       description: 'Shop with confidence using our secure payment gateway. We accept all major payment methods.',
-      features: ['Payment gateway integration', 'Multiple payment options', 'Secure transactions', 'Payment confirmation']
+      features: ['Payment gateway integration', 'Multiple payment options', 'Secure transactions', 'Payment confirmation'],
+      color: 'from-green-500 to-green-600'
     },
     {
       icon: Package,
       title: 'Product Sourcing',
       description: 'We help businesses source quality products from verified suppliers at competitive prices.',
-      features: ['Supplier verification', 'Quality inspection', 'Bulk pricing', 'Custom sourcing']
+      features: ['Supplier verification', 'Quality inspection', 'Bulk pricing', 'Custom sourcing'],
+      color: 'from-purple-500 to-purple-600'
     },
     {
       icon: Phone,
       title: 'Customer Support',
       description: 'Our dedicated support team is available 24/7 to assist you with any questions or concerns.',
-      features: ['24/7 availability', 'Multiple contact channels', 'Quick response time', 'Post-purchase support']
+      features: ['24/7 availability', 'Multiple contact channels', 'Quick response time', 'Post-purchase support'],
+      color: 'from-orange-500 to-orange-600'
     },
     {
       icon: Tag,
       title: 'Best Price Guarantee',
       description: 'We guarantee the best prices on all our products. Found a better price? We\'ll match it!',
-      features: ['Price matching', 'Regular price audits', 'Discount alerts', 'Seasonal offers']
+      features: ['Price matching', 'Regular price audits', 'Discount alerts', 'Seasonal offers'],
+      color: 'from-red-500 to-red-600'
     },
     {
       icon: Star,
       title: 'Quality Assurance',
       description: 'Every product undergoes rigorous quality checks before being listed on our platform.',
-      features: ['Quality inspection', 'Authenticity verification', 'Warranty coverage', 'Return policy']
+      features: ['Quality inspection', 'Authenticity verification', 'Warranty coverage', 'Return policy'],
+      color: 'from-yellow-500 to-yellow-600'
     }
   ];
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       {/* Hero with Background Image */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-32 md:py-48 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image3})` }}
         >
-          <div className="absolute inset-0 bg-linear-to-r from-green-900/90 via-green-800/70 to-green-700/50"></div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-green-900/90 via-green-800/80 to-green-700/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         </div>
         
         {/* Content */}
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Our Services</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10">
-            Comprehensive solutions to meet all your shopping needs
+        <div className="relative container mx-auto px-4 text-center animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">Our Premium Services</h1>
+          <p className="text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed">
+            Comprehensive solutions tailored to meet all your branding and business needs
           </p>
           <button 
             onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20information%20about%20your%20services`, '_blank')}
-            className="px-10 py-4 bg-white text-green-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
+            className="px-12 py-5 bg-white text-green-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-lg"
           >
-            Inquire About Services
+            Get Service Consultation
           </button>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {allServices.map((service, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
-                <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4">
-                  <service.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-3 group">
+                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">{service.description}</p>
-                <ul className="space-y-2">
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 text-center leading-relaxed">{service.description}</p>
+                <ul className="space-y-3">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <ChevronRight className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
+                    <li key={idx} className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="w-5 h-5 text-blue-500" />
                       {feature}
                     </li>
                   ))}
@@ -942,19 +967,47 @@ const ServicesPage = () => {
         </div>
       </section>
 
+      {/* Process Section */}
+      <section className="py-20 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">How We Work</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { step: '01', title: 'Consultation', desc: 'We understand your requirements' },
+              { step: '02', title: 'Planning', desc: 'Create customized strategy' },
+              { step: '03', title: 'Execution', desc: 'Implement with precision' },
+              { step: '04', title: 'Delivery', desc: 'Deliver exceptional results' }
+            ].map((process, index) => (
+              <div key={index} className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <span className="text-3xl font-bold text-blue-600 dark:text-blue-300">{process.step}</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{process.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{process.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Need Custom Solutions?</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            We offer tailored solutions for businesses and individuals. Contact us to discuss your specific requirements.
-          </p>
-          <button 
-            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20custom%20solutions%20for%20my%20business`, '_blank')}
-            className="px-8 py-4 bg-blue-800 hover:bg-blue-700 text-white rounded-lg font-bold transition-all duration-300 active:scale-95"
-          >
-            Get Custom Quote
-          </button>
+          <div className="max-w-4xl mx-auto bg-linear-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-900 rounded-3xl p-12 shadow-2xl">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Need Custom Solutions?</h2>
+            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-10">
+              We offer tailored solutions for businesses and individuals. Contact us to discuss your specific requirements.
+            </p>
+            <button 
+              onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20custom%20solutions%20for%20my%20business`, '_blank')}
+              className="px-12 py-5 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-lg"
+            >
+              Get Custom Quote
+            </button>
+          </div>
         </div>
       </section>
     </div>
@@ -963,145 +1016,131 @@ const ServicesPage = () => {
 
 const WebsitePackagesPage = () => {
   const packages = [
-      {
+    {
       name: "R-Pro Lite",
       price: "₦70,000",
-      originalPrice: "₦850,000",
-      description: "Ideal for growing businesses with more features",
+      originalPrice: "₦100,000",
+      description: "Perfect for small businesses starting their online journey",
       features: [
-        "5-10 Pages Website",
-        "Custom Design",
-        "Advanced SEO",
-        "Blog Setup",
-        "E-commerce Ready (Basic)",
-        "1 Year Support",
-        "Google Analytics",
-        "Speed Optimization",
-        "SSL Certificate",
-        "Content Management System",
+        "5 Pages Website",
+        "Responsive Design",
+        "Basic SEO Setup",
+        "Contact Form",
+        "Social Media Integration",
+        "6 Months Support",
+        "Mobile Friendly",
         "Free Domain (1 Year)",
-        "Hosting (1 Year)"
+        "Hosting (6 Months)",
+        "Basic Analytics"
       ],
-      recommended: true,
-      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+      recommended: false,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the R-Pro Lite Website Package (₦70,000). Can you provide more details?"
     },
     {
       name: "R-Pro Start",
       price: "₦160,000",
-      originalPrice: "₦850,000",
-      description: "Ideal for growing businesses with more features",
+      originalPrice: "₦220,000",
+      description: "Ideal for growing businesses with advanced features",
       features: [
-        "5-10 Pages Website",
+        "10 Pages Website",
         "Custom Design",
         "Advanced SEO",
         "Blog Setup",
-        "E-commerce Ready (Basic)",
+        "E-commerce Ready",
         "1 Year Support",
         "Google Analytics",
         "Speed Optimization",
         "SSL Certificate",
         "Content Management System",
         "Free Domain (1 Year)",
-        "Hosting (1 Year)"
+        "Hosting (1 Year)",
+        "Social Media Integration"
       ],
       recommended: true,
-      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the R-Pro Start Website Package (₦160,000). Can you provide more details?"
     },
     {
       name: "R-Pro Plus",
       price: "₦350,000",
-      originalPrice: "₦850,000",
-      description: "Ideal for growing businesses with more features",
+      originalPrice: "₦480,000",
+      description: "Premium solution for established businesses",
       features: [
-        "5-10 Pages Website",
-        "Custom Design",
-        "Advanced SEO",
-        "Blog Setup",
-        "E-commerce Ready (Basic)",
-        "1 Year Support",
-        "Google Analytics",
-        "Speed Optimization",
-        "SSL Certificate",
-        "Content Management System",
-        "Free Domain (1 Year)",
-        "Hosting (1 Year)"
+        "15 Pages Website",
+        "Premium Custom Design",
+        "Full E-commerce Solution",
+        "Advanced SEO Package",
+        "Priority Support",
+        "2 Years Maintenance",
+        "Payment Gateway Integration",
+        "Multi-language Support",
+        "Performance Optimization",
+        "Regular Backups",
+        "Security Monitoring",
+        "Dedicated Account Manager",
+        "Free Domain (2 Years)",
+        "Hosting (2 Years)"
       ],
-      recommended: true,
-      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
-    },
-    {
-      name: "R-Pro Max",
-      price: "₦400,000",
-      originalPrice: "₦850,000",
-      description: "Ideal for growing businesses with more features",
-      features: [
-        "5-10 Pages Website",
-        "Custom Design",
-        "Advanced SEO",
-        "Blog Setup",
-        "E-commerce Ready (Basic)",
-        "1 Year Support",
-        "Google Analytics",
-        "Speed Optimization",
-        "SSL Certificate",
-        "Content Management System",
-        "Free Domain (1 Year)",
-        "Hosting (1 Year)"
-      ],
-      recommended: true,
-      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
-    },
-    
+      recommended: false,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the R-Pro Plus Website Package (₦350,000). Please schedule a consultation."
+    }
   ];
 
   const processSteps = [
-    { step: "01", title: "Discovery", desc: "We understand your requirements and goals" },
-    { step: "02", title: "Design", desc: "Create wireframes and design mockups" },
-    { step: "03", title: "Development", desc: "Build your website with modern technologies" },
-    { step: "04", title: "Launch", desc: "Deploy, test, and launch your website" }
+    { step: "01", title: "Discovery", desc: "We understand your requirements and goals", icon: Headphones },
+    { step: "02", title: "Design", desc: "Create wireframes and design mockups", icon: Palette },
+    { step: "03", title: "Development", desc: "Build your website with modern technologies", icon: Code },
+    { step: "04", title: "Launch", desc: "Deploy, test, and launch your website", icon: Zap }
   ];
 
   const faqs = [
     {
       question: "How long does it take to build a website?",
-      answer: "Starter packages take 2-3 weeks, Business packages take 3-4 weeks, and Enterprise packages take 4-6 weeks depending on complexity."
+      answer: "R-Pro Lite takes 1-2 weeks, R-Pro Start takes 2-3 weeks, and R-Pro Plus takes 3-4 weeks depending on complexity."
     },
     {
       question: "Do you provide ongoing maintenance?",
-      answer: "Yes, all packages include maintenance for the specified period. After that, we offer affordable monthly maintenance plans."
+      answer: "Yes, all packages include maintenance for the specified period. After that, we offer affordable monthly maintenance plans starting from ₦10,000/month."
     },
     {
       question: "Can I update the website content myself?",
-      answer: "Yes, all our websites come with a user-friendly content management system (CMS) that allows you to update content easily."
+      answer: "Yes, all our websites come with a user-friendly content management system (WordPress) that allows you to update content easily without technical knowledge."
     },
     {
       question: "Is hosting included in the package?",
-      answer: "Yes, all packages include hosting for the specified period. We use reliable hosting with 99.9% uptime guarantee."
+      answer: "Yes, all packages include premium hosting with 99.9% uptime guarantee, SSL certificate, and daily backups."
+    },
+    {
+      question: "Do you provide training?",
+      answer: "Yes, we provide comprehensive training on how to use and manage your website after launch."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept bank transfers, credit cards, and payment plans are available for larger projects."
     }
   ];
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       {/* Hero with Background Image */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-32 md:py-48 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image5})` }}
         >
-          <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-blue-800/70 to-blue-700/50"></div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-blue-800/80 to-blue-700/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         </div>
         
         {/* Content */}
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Website Building Packages</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10">
-            Professional website packages designed to grow your business online
+        <div className="relative container mx-auto px-4 text-center animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">Professional Website Packages</h1>
+          <p className="text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto mb-12 leading-relaxed">
+            Premium website solutions designed to accelerate your business growth
           </p>
           <button 
             onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20discuss%20website%20packages`, '_blank')}
-            className="px-10 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
+            className="px-12 py-5 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-lg"
           >
             Get Free Consultation
           </button>
@@ -1109,43 +1148,44 @@ const WebsitePackagesPage = () => {
       </section>
 
       {/* Packages Section */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Choose Your Package</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              All packages include professional design, development, hosting, and ongoing support
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Choose Your Package</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-lg">
+              All packages include professional design, development, hosting, security, and ongoing support
             </p>
           </div>
 
           {/* Packages Grid */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
             {packages.map((pkg, index) => (
               <div 
                 key={index} 
-                className={`rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl ${
+                className={`rounded-3xl overflow-hidden border-2 transition-all duration-500 hover:-translate-y-3 ${
                   pkg.recommended 
-                    ? 'border-blue-500 dark:border-blue-400 transform scale-105 relative z-10' 
-                    : 'border-gray-200 dark:border-gray-700'
+                    ? 'border-blue-500 dark:border-blue-400 relative z-10 shadow-2xl' 
+                    : 'border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl'
                 }`}
               >
                 {pkg.recommended && (
-                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-semibold">
-                    MOST POPULAR
+                  <div className="absolute top-0 left-0 right-0 bg-linear-to-r from-blue-600 to-blue-800 text-white text-center py-3 text-sm font-bold uppercase tracking-wider">
+                    ⭐ MOST POPULAR
                   </div>
                 )}
                 
-                <div className={`p-8 ${pkg.recommended ? 'pt-12' : ''}`}>
-                  <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                <div className={`p-10 ${pkg.recommended ? 'pt-16' : ''}`}>
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                       {pkg.name}
                     </h3>
                     <div className="flex items-baseline justify-center mb-4">
-                      <span className="text-4xl font-bold text-gray-800 dark:text-white">
+                      <span className="text-5xl font-bold bg-linear-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                         {pkg.price}
                       </span>
                     </div>
-                    <div className="text-gray-500 dark:text-gray-400 line-through mb-2">
+                    <div className="text-gray-500 dark:text-gray-400 line-through mb-4">
                       {pkg.originalPrice}
                     </div>
                     <p className="text-gray-600 dark:text-gray-400">
@@ -1153,11 +1193,11 @@ const WebsitePackagesPage = () => {
                     </p>
                   </div>
 
-                  <div className="mb-8">
-                    <ul className="space-y-3">
+                  <div className="mb-10">
+                    <ul className="space-y-4">
                       {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mr-3 mt-0.5" />
+                        <li key={idx} className="flex items-start gap-4">
+                          <CheckCircle className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
                           <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                         </li>
                       ))}
@@ -1170,10 +1210,10 @@ const WebsitePackagesPage = () => {
                       const whatsappUrl = `https://wa.me/2349069246577?text=${message}`;
                       window.open(whatsappUrl, '_blank');
                     }}
-                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 active:scale-95 ${
+                    className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg ${
                       pkg.recommended
-                        ? 'bg-blue-700 hover:bg-blue-700 text-white'
-                        : 'bg-blue-700 hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-gray-800 text-white'
+                        ? 'bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white'
+                        : 'bg-linear-to-r from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 hover:from-gray-900 hover:to-gray-950 text-white'
                     }`}
                   >
                     Get This Package
@@ -1184,23 +1224,23 @@ const WebsitePackagesPage = () => {
           </div>
 
           {/* Custom Package Section */}
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          <div className="bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-12 mb-20 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
                 Need a Custom Solution?
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Our custom packages are tailored to your specific requirements. 
-                Get exactly what you need with no compromises.
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+              <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-lg">
+                Our custom packages are tailored to your specific requirements. Get exactly what you need with no compromises.
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-8">
                   Custom Package Includes:
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {[
                     "Custom Web Application Development",
                     "API Integration",
@@ -1211,23 +1251,25 @@ const WebsitePackagesPage = () => {
                     "Advanced Analytics Dashboard",
                     "Multi-user Systems",
                     "Custom Payment Solutions",
-                    "Ongoing Development & Updates"
+                    "Ongoing Development & Updates",
+                    "Custom Mobile App Development",
+                    "Enterprise Solutions"
                   ].map((item, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mr-3 mt-0.5" />
-                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
+                    <li key={idx} className="flex items-start gap-4">
+                      <CheckCircle className="w-6 h-6 text-blue-600 shrink-0 mt-0.5" />
+                      <span className="text-gray-700 dark:text-gray-300 text-lg">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               
               <div className="flex flex-col justify-center">
-                <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow">
-                  <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-4">
+                <div className="bg-white dark:bg-gray-900 rounded-2xl p-10 shadow-2xl">
+                  <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                     Get a Custom Quote
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Contact us to discuss your project requirements and get a personalized quote.
+                  <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+                    Contact us to discuss your project requirements and get a personalized quote with a detailed proposal.
                   </p>
                   <button
                     onClick={() => {
@@ -1235,7 +1277,7 @@ const WebsitePackagesPage = () => {
                       const whatsappUrl = `https://wa.me/2349069246577?text=${message}`;
                       window.open(whatsappUrl, '_blank');
                     }}
-                    className="w-full bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-300 active:scale-95"
+                    className="w-full py-4 px-6 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-xl font-bold transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
                   >
                     Request Custom Quote
                   </button>
@@ -1245,33 +1287,47 @@ const WebsitePackagesPage = () => {
           </div>
 
           {/* Process Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
-              Our Website Building Process
-            </h2>
-            <div className="grid md:grid-cols-4 gap-6">
+          <div className="mb-20">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Our Website Building Process</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+            </div>
+            <div className="grid md:grid-cols-4 gap-8">
               {processSteps.map((process, idx) => (
-                <div key={idx} className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-300">{process.step}</span>
+                <div key={idx} className="text-center group">
+                  <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl group-hover:scale-110 transition-transform duration-500">
+                    <div className="relative">
+                      <process.icon className="w-12 h-12 text-blue-600 dark:text-blue-400" />
+                      <span className="absolute -top-2 -right-2 w-8 h-8 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-sm font-bold text-blue-600 dark:text-blue-400">
+                        {process.step}
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-gray-800 dark:text-white mb-2">{process.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">{process.desc}</p>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">{process.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{process.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* FAQ Section */}
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
-              Frequently Asked Questions
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-12 shadow-2xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">
+                Frequently Asked Questions
+              </h2>
+              <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
               {faqs.map((faq, idx) => (
-                <div key={idx} className="bg-white dark:bg-gray-900 rounded-lg p-6">
-                  <h3 className="font-bold text-gray-800 dark:text-white mb-3">{faq.question}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{faq.answer}</p>
+                <div key={idx} className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-start gap-4">
+                    <span className="w-8 h-8 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-lg flex items-center justify-center shrink-0">
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">Q</span>
+                    </span>
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 pl-12">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -1280,18 +1336,20 @@ const WebsitePackagesPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-600 dark:bg-blue-800">
+      <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
-          <p className="text-white/90 max-w-2xl mx-auto mb-8">
-            Contact us today for a free consultation and let's build something amazing together.
-          </p>
-          <button 
-            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I'm%20ready%20to%20start%20my%20website%20project`, '_blank')}
-            className="px-10 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 text-lg"
-          >
-            Start Your Project Now
-          </button>
+          <div className="max-w-5xl mx-auto bg-linear-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-900 rounded-3xl p-16 shadow-2xl">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">Ready to Start Your Project?</h2>
+            <p className="text-2xl text-white/90 max-w-3xl mx-auto mb-12">
+              Contact us today for a free consultation and let's build something amazing together.
+            </p>
+            <button 
+              onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I'm%20ready%20to%20start%20my%20website%20project`, '_blank')}
+              className="px-16 py-6 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-2xl hover:shadow-3xl text-xl"
+            >
+              Start Your Project Now
+            </button>
+          </div>
         </div>
       </section>
     </div>
@@ -1323,125 +1381,129 @@ const ContactPage = () => {
       icon: Phone,
       title: 'Phone Number',
       info: '+2349069246577',
-      action: 'tel:+2349069246577'
+      action: 'tel:+2349069246577',
+      color: 'from-blue-500 to-blue-600'
     },
     {
       icon: Mail,
       title: 'Email Address',
       info: 'info@cyjustdeal.com',
-      action: 'mailto:info@cyjustdeal.com'
+      action: 'mailto:info@cyjustdeal.com',
+      color: 'from-green-500 to-green-600'
     },
     {
       icon: MapPin,
       title: 'Location',
       info: 'Lagos, Nigeria',
-      action: 'https://maps.google.com/?q=Lagos,Nigeria'
+      action: 'https://maps.google.com/?q=Lagos,Nigeria',
+      color: 'from-purple-500 to-purple-600'
     },
     {
       icon: Clock,
       title: 'Business Hours',
       info: '24/7 Customer Support',
-      action: null
+      action: null,
+      color: 'from-orange-500 to-orange-600'
     }
   ];
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       {/* Hero with Background Image */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-32 md:py-48 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image4})` }}
         >
-          <div className="absolute inset-0 bg-linear-to-r from-purple-900/90 via-purple-800/70 to-purple-700/50"></div>
-          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-purple-900/90 via-purple-800/80 to-purple-700/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         </div>
         
         {/* Content */}
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Contact Us</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
-            Get in touch with our team. We're here to help!
+        <div className="relative container mx-auto px-4 text-center animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">Get in Touch</h1>
+          <p className="text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            We're here to help! Reach out to us for any inquiries or collaborations
           </p>
         </div>
       </section>
 
       {/* Contact Content */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Send us a message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-3xl p-12 shadow-2xl">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-10">Send us a message</h2>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+                    <label className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Full Name</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                    <label className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Email Address</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                       placeholder="john@example.com"
                     />
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
+                    <label className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Phone Number</label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                       placeholder="+234 906 924 6577"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                    <label className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Subject</label>
                     <input
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                       placeholder="How can we help?"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                  <label className="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    rows={8}
+                    className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                     placeholder="Your message here..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold transition-all duration-300 active:scale-95"
+                  className="w-full px-8 py-5 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-bold transition-all duration-300 active:scale-95 shadow-xl hover:shadow-2xl text-lg"
                 >
                   Send Message via WhatsApp
                 </button>
@@ -1450,24 +1512,24 @@ const ContactPage = () => {
 
             {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Contact Information</h2>
-              <div className="space-y-6 mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-10">Contact Information</h2>
+              <div className="space-y-8 mb-12">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
-                      <info.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  <div key={index} className="flex items-start gap-6 p-8 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${info.color} rounded-2xl flex items-center justify-center shrink-0`}>
+                      <info.icon className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-800 dark:text-white mb-1">{info.title}</h3>
+                      <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">{info.title}</h3>
                       {info.action ? (
                         <a 
                           href={info.action}
-                          className="text-blue-600 dark:text-blue-400 hover:underline"
+                          className="text-xl text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                         >
                           {info.info}
                         </a>
                       ) : (
-                        <p className="text-gray-600 dark:text-gray-400">{info.info}</p>
+                        <p className="text-xl text-gray-600 dark:text-gray-400">{info.info}</p>
                       )}
                     </div>
                   </div>
@@ -1475,20 +1537,41 @@ const ContactPage = () => {
               </div>
 
               {/* WhatsApp Quick Contact */}
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
-                <h3 className="font-bold text-gray-800 dark:text-white mb-4">Quick Contact via WhatsApp</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Click below to chat with us instantly on WhatsApp. Our team typically responds within minutes.
+              <div className="bg-linear-to-r from-green-50 to-green-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-10 shadow-2xl">
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Quick Contact via WhatsApp</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg">
+                  Click below to chat with us instantly on WhatsApp. Our team typically responds within minutes during business hours.
                 </p>
                 <button 
                   onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20assistance`, '_blank')}
-                  className="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300 active:scale-95"
+                  className="w-full px-8 py-5 bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl font-medium transition-all duration-300 active:scale-95 shadow-xl hover:shadow-2xl text-lg flex items-center justify-center gap-4"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.438 9.88-9.888 9.88m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
                   </svg>
                   Chat on WhatsApp Now
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-linear-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6">Visit Our Office</h2>
+            <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-blue-800 rounded-full mx-auto mb-6"></div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl">
+            <div className="h-96 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-700">
+              <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="w-20 h-20 text-blue-600 dark:text-blue-400 mx-auto mb-6" />
+                  <p className="text-2xl text-gray-800 dark:text-white mb-4">Lagos, Nigeria</p>
+                  <p className="text-gray-600 dark:text-gray-400">Available for appointments and consultations</p>
+                </div>
               </div>
             </div>
           </div>
@@ -1509,29 +1592,29 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, label: 'Facebook', url: 'https://facebook.com/cyjustdeal' },
-    { icon: Twitter, label: 'Twitter', url: 'https://twitter.com/cyjustdeal' },
-    { icon: Instagram, label: 'Instagram', url: 'https://instagram.com/cyjustdeal' },
-    { icon: Linkedin, label: 'LinkedIn', url: 'https://linkedin.com/company/cyjustdeal' }
+    { icon: Facebook, label: 'Facebook', url: 'https://facebook.com/cyjustdeal', color: 'hover:bg-blue-600' },
+    { icon: Twitter, label: 'Twitter', url: 'https://twitter.com/cyjustdeal', color: 'hover:bg-blue-400' },
+    { icon: Instagram, label: 'Instagram', url: 'https://instagram.com/cyjustdeal', color: 'hover:bg-pink-600' },
+    { icon: Linkedin, label: 'LinkedIn', url: 'https://linkedin.com/company/cyjustdeal', color: 'hover:bg-blue-700' }
   ];
 
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
+    <footer className="bg-linear-to-r from-gray-900 to-gray-950 text-white pt-20 pb-12">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <img src={logo} alt="CyJust Deal Logo"  />
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
+                <img src={logo} alt="CyJust Deal Logo" className="w-10 h-10" />
               </div>
               <div>
-                <h2 className="text-xl font-bold">CyJust Deal</h2>
+                <h2 className="text-2xl font-bold bg-linear-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">CyJust Deal</h2>
                 <p className="text-sm text-gray-400">Best Deals Daily</p>
               </div>
             </div>
-            <p className="text-gray-400 mb-6">
-              Your trusted partner for quality products at unbeatable prices. We deliver happiness to your doorstep.
+            <p className="text-gray-400 mb-8 leading-relaxed">
+              Your trusted partner for quality products and digital solutions. We deliver excellence and innovation to help your business thrive.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
@@ -1540,10 +1623,10 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95"
+                  className={`w-12 h-12 bg-gray-800 ${social.color} rounded-xl flex items-center justify-center transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl`}
                   aria-label={social.label}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-6 h-6" />
                 </a>
               ))}
             </div>
@@ -1551,15 +1634,15 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-xl font-bold mb-8 pb-4 border-b border-gray-800">Quick Links</h3>
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a 
                     href={`#${link.page}`}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2"
+                    className="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-3 group"
                   >
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-2 transition-transform" />
                     {link.name}
                   </a>
                 </li>
@@ -1569,61 +1652,89 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Our Services</h3>
-            <ul className="space-y-3">
+            <h3 className="text-xl font-bold mb-8 pb-4 border-b border-gray-800">Our Services</h3>
+            <ul className="space-y-4">
               {services.map((service, index) => (
-                <li key={index} className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2">
-                  <ChevronRight className="w-4 h-4" />
+                <li key={index} className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-3">
+                  <ChevronRight className="w-4 h-4 text-blue-400" />
                   {service.title}
                 </li>
               ))}
+              <li className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-3">
+                <ChevronRight className="w-4 h-4 text-blue-400" />
+                Website Development
+              </li>
+              <li className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-3">
+                <ChevronRight className="w-4 h-4 text-blue-400" />
+                Digital Marketing
+              </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Contact Us</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-100" />
-                <span className="text-gray-400">+2349069246577</span>
+            <h3 className="text-xl font-bold mb-8 pb-4 border-b border-gray-800">Contact Us</h3>
+            <ul className="space-y-6">
+              <li className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-blue-300" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Phone Number</p>
+                  <a href="tel:+2349069246577" className="text-white hover:text-blue-300 transition-colors">+2349069246577</a>
+                </div>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-blue-100" />
-                <span className="text-gray-400">info@cyjustdeal.com</span>
+              <li className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-900 to-green-800 rounded-xl flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-green-300" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Email Address</p>
+                  <a href="mailto:info@cyjustdeal.com" className="text-white hover:text-green-300 transition-colors">info@cyjustdeal.com</a>
+                </div>
               </li>
-              <li className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-blue-100" />
-                <span className="text-gray-400">Lagos, Nigeria</span>
+              <li className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-900 to-purple-800 rounded-xl flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-purple-300" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Location</p>
+                  <p className="text-white">Lagos, Nigeria</p>
+                </div>
               </li>
-              <li className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-blue-100" />
-                <span className="text-gray-400">24/7 Customer Support</span>
+              <li className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-900 to-orange-800 rounded-xl flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-orange-300" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Business Hours</p>
+                  <p className="text-white">24/7 Customer Support</p>
+                </div>
               </li>
             </ul>
           </div>
         </div>
 
         {/* WhatsApp Button - Fixed on Mobile */}
-        <div className="fixed bottom-6 right-6 z-40 lg:hidden">
+        <div className="fixed bottom-8 right-8 z-50 lg:hidden">
           <button 
             onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20assistance`, '_blank')}
-            className="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 active:scale-95"
+            className="w-16 h-16 bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 active:scale-95 animate-bounce-slow"
             aria-label="Chat on WhatsApp"
           >
-            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.438 9.88-9.888 9.88m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
             </svg>
           </button>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-400">
+        <div className="border-t border-gray-800 mt-16 pt-12 text-center">
+          <p className="text-gray-400 text-lg">
             &copy; {new Date().getFullYear()} CyJust Deal. All rights reserved.
           </p>
-          <p className="text-gray-500 text-sm mt-2">
-            Designed with ❤️ for Nigerian customers
+          <p className="text-gray-500 text-sm mt-4">
+            Designed with ❤️ for Nigerian businesses and entrepreneurs
           </p>
         </div>
       </div>
@@ -1633,18 +1744,41 @@ const Footer = () => {
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
+
+  // Load current page from URL hash on initial load
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    if (hash && ['home', 'products', 'about', 'services', 'website-packages', 'contact'].includes(hash)) {
+      setCurrentPage(hash);
+    }
+  }, []);
+
+  // Update URL hash when page changes
+  useEffect(() => {
+    window.history.replaceState({ page: currentPage }, '', `/#${currentPage}`);
+  }, [currentPage]);
+
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    if (theme === 'dark') {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    if (savedTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [theme]);
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
 
   const renderPage = () => {
@@ -1667,14 +1801,52 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 overflow-x-hidden">
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out;
+        }
+        
+        .animate-slideDown {
+          animation: slideDown 0.3s ease-out;
+        }
+        
+        .animate-bounce-slow {
+          animation: bounce-slow 2s infinite;
+        }
+        
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+      
       <Header 
         currentPage={currentPage} 
         setCurrentPage={setCurrentPage} 
         theme={theme} 
         toggleTheme={toggleTheme} 
       />
-      <main>
+      <main className="scrollbar-hide">
         {renderPage()}
       </main>
       <Footer />
