@@ -7,6 +7,7 @@ import flyersImage4 from './img/ooad5r0.jpg';
 import flyersImage5 from './img/stationery6_01.jpg';
 import flyersImage6 from './img/mp5-01.jpg';
 import flyersImage7 from './img/730.jpg';
+import flyersImage8 from './img/close-up-green-pens.jpg';
 
 import image1 from './img/1.jpg';
 import image2 from './img/2.jpg';
@@ -85,7 +86,7 @@ const featuredProducts = [
      name: 'Pen Branding',
       price: 4999, 
        discount: 58,
-        image: 'Pen Branding',
+        image: flyersImage8,
          rating: 4.6, 
          reviews: 145, 
          inStock: true },
@@ -129,6 +130,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
     { name: 'PRODUCTS', page: 'products' },
     { name: 'ABOUT US', page: 'about' },
     { name: 'SERVICES', page: 'services' },
+    { name: 'WEBSITE PACKAGES', page: 'website-packages' },
     { name: 'CONTACT', page: 'contact' }
   ];
 
@@ -294,40 +296,31 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      {/* Product Info */}
-      <div className="p-4">
-        <h3 className="font-semibold text-sm text-gray-800 dark:text-white mb-2 line-clamp-2 min-h-10">
-          {product.name}
-        </h3>
-        
-        <div className="flex items-center gap-1 mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-          ))}
-          <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({product.reviews})</span>
-        </div>
-        
-        <div className="mb-3">
-          <p className="text-lg font-bold text-blue-600 dark:text-blue-400">
-            ₦{product.price.toLocaleString()}
-          </p>
-          {product.discount > 0 && (
-            <p className="text-xs text-gray-400 dark:text-gray-500 line-through">
-              ₦{Math.round(product.price / (1 - product.discount/100)).toLocaleString()}
-            </p>
-          )}
-        </div>
-        
-        <button 
-          onClick={orderOnWhatsApp}
-          className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.438 9.88-9.888 9.88m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.495-8.411"/>
-          </svg>
-          Order on WhatsApp
-        </button>
-      </div>
+     {/* Product Info */}
+<div className="p-4">
+  <h3 className="font-semibold text-sm text-gray-800 dark:text-white mb-2 line-clamp-2 min-h-10">
+    {product.name}
+  </h3>
+
+  <div className="flex items-center gap-1 mb-3">
+    {[...Array(5)].map((_, i) => (
+      <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+    ))}
+    <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
+      ({product.reviews})
+    </span>
+  </div>
+
+  <button
+    onClick={orderOnWhatsApp}
+    className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+  >
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..." />
+    </svg>
+    Order on WhatsApp
+  </button>
+</div>
     </div>
   );
 };
@@ -958,9 +951,346 @@ const ServicesPage = () => {
           </p>
           <button 
             onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20need%20custom%20solutions%20for%20my%20business`, '_blank')}
-            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold transition-all duration-300 active:scale-95"
+            className="px-8 py-4 bg-blue-800 hover:bg-blue-700 text-white rounded-lg font-bold transition-all duration-300 active:scale-95"
           >
             Get Custom Quote
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const WebsitePackagesPage = () => {
+  const packages = [
+      {
+      name: "R-Pro Lite",
+      price: "₦70,000",
+      originalPrice: "₦850,000",
+      description: "Ideal for growing businesses with more features",
+      features: [
+        "5-10 Pages Website",
+        "Custom Design",
+        "Advanced SEO",
+        "Blog Setup",
+        "E-commerce Ready (Basic)",
+        "1 Year Support",
+        "Google Analytics",
+        "Speed Optimization",
+        "SSL Certificate",
+        "Content Management System",
+        "Free Domain (1 Year)",
+        "Hosting (1 Year)"
+      ],
+      recommended: true,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+    },
+    {
+      name: "R-Pro Start",
+      price: "₦160,000",
+      originalPrice: "₦850,000",
+      description: "Ideal for growing businesses with more features",
+      features: [
+        "5-10 Pages Website",
+        "Custom Design",
+        "Advanced SEO",
+        "Blog Setup",
+        "E-commerce Ready (Basic)",
+        "1 Year Support",
+        "Google Analytics",
+        "Speed Optimization",
+        "SSL Certificate",
+        "Content Management System",
+        "Free Domain (1 Year)",
+        "Hosting (1 Year)"
+      ],
+      recommended: true,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+    },
+    {
+      name: "R-Pro Plus",
+      price: "₦350,000",
+      originalPrice: "₦850,000",
+      description: "Ideal for growing businesses with more features",
+      features: [
+        "5-10 Pages Website",
+        "Custom Design",
+        "Advanced SEO",
+        "Blog Setup",
+        "E-commerce Ready (Basic)",
+        "1 Year Support",
+        "Google Analytics",
+        "Speed Optimization",
+        "SSL Certificate",
+        "Content Management System",
+        "Free Domain (1 Year)",
+        "Hosting (1 Year)"
+      ],
+      recommended: true,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+    },
+    {
+      name: "R-Pro Max",
+      price: "₦400,000",
+      originalPrice: "₦850,000",
+      description: "Ideal for growing businesses with more features",
+      features: [
+        "5-10 Pages Website",
+        "Custom Design",
+        "Advanced SEO",
+        "Blog Setup",
+        "E-commerce Ready (Basic)",
+        "1 Year Support",
+        "Google Analytics",
+        "Speed Optimization",
+        "SSL Certificate",
+        "Content Management System",
+        "Free Domain (1 Year)",
+        "Hosting (1 Year)"
+      ],
+      recommended: true,
+      whatsappMessage: "Hi CyJust Deal! I'm interested in the Business Website Package (₦599,000). Can you provide more details about what's included?"
+    },
+    
+  ];
+
+  const processSteps = [
+    { step: "01", title: "Discovery", desc: "We understand your requirements and goals" },
+    { step: "02", title: "Design", desc: "Create wireframes and design mockups" },
+    { step: "03", title: "Development", desc: "Build your website with modern technologies" },
+    { step: "04", title: "Launch", desc: "Deploy, test, and launch your website" }
+  ];
+
+  const faqs = [
+    {
+      question: "How long does it take to build a website?",
+      answer: "Starter packages take 2-3 weeks, Business packages take 3-4 weeks, and Enterprise packages take 4-6 weeks depending on complexity."
+    },
+    {
+      question: "Do you provide ongoing maintenance?",
+      answer: "Yes, all packages include maintenance for the specified period. After that, we offer affordable monthly maintenance plans."
+    },
+    {
+      question: "Can I update the website content myself?",
+      answer: "Yes, all our websites come with a user-friendly content management system (CMS) that allows you to update content easily."
+    },
+    {
+      question: "Is hosting included in the package?",
+      answer: "Yes, all packages include hosting for the specified period. We use reliable hosting with 99.9% uptime guarantee."
+    }
+  ];
+
+  return (
+    <div className="bg-white dark:bg-gray-900 min-h-screen">
+      {/* Hero with Background Image */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${image5})` }}
+        >
+          <div className="absolute inset-0 bg-linear-to-r from-blue-900/90 via-blue-800/70 to-blue-700/50"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Website Building Packages</h1>
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10">
+            Professional website packages designed to grow your business online
+          </p>
+          <button 
+            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I%20want%20to%20discuss%20website%20packages`, '_blank')}
+            className="px-10 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-lg"
+          >
+            Get Free Consultation
+          </button>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Choose Your Package</h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              All packages include professional design, development, hosting, and ongoing support
+            </p>
+          </div>
+
+          {/* Packages Grid */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {packages.map((pkg, index) => (
+              <div 
+                key={index} 
+                className={`rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl ${
+                  pkg.recommended 
+                    ? 'border-blue-500 dark:border-blue-400 transform scale-105 relative z-10' 
+                    : 'border-gray-200 dark:border-gray-700'
+                }`}
+              >
+                {pkg.recommended && (
+                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center py-2 text-sm font-semibold">
+                    MOST POPULAR
+                  </div>
+                )}
+                
+                <div className={`p-8 ${pkg.recommended ? 'pt-12' : ''}`}>
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                      {pkg.name}
+                    </h3>
+                    <div className="flex items-baseline justify-center mb-4">
+                      <span className="text-4xl font-bold text-gray-800 dark:text-white">
+                        {pkg.price}
+                      </span>
+                    </div>
+                    <div className="text-gray-500 dark:text-gray-400 line-through mb-2">
+                      {pkg.originalPrice}
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {pkg.description}
+                    </p>
+                  </div>
+
+                  <div className="mb-8">
+                    <ul className="space-y-3">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mr-3 mt-0.5" />
+                          <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      const message = encodeURIComponent(pkg.whatsappMessage);
+                      const whatsappUrl = `https://wa.me/2349069246577?text=${message}`;
+                      window.open(whatsappUrl, '_blank');
+                    }}
+                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 active:scale-95 ${
+                      pkg.recommended
+                        ? 'bg-blue-700 hover:bg-blue-700 text-white'
+                        : 'bg-blue-700 hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-gray-800 text-white'
+                    }`}
+                  >
+                    Get This Package
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Custom Package Section */}
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+                Need a Custom Solution?
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Our custom packages are tailored to your specific requirements. 
+                Get exactly what you need with no compromises.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
+                  Custom Package Includes:
+                </h3>
+                <ul className="space-y-3">
+                  {[
+                    "Custom Web Application Development",
+                    "API Integration",
+                    "Database Design",
+                    "Advanced Security Features",
+                    "Custom Animations & Interactions",
+                    "Third-party Service Integration",
+                    "Advanced Analytics Dashboard",
+                    "Multi-user Systems",
+                    "Custom Payment Solutions",
+                    "Ongoing Development & Updates"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-blue-600 shrink-0 mr-3 mt-0.5" />
+                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="flex flex-col justify-center">
+                <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow">
+                  <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-4">
+                    Get a Custom Quote
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    Contact us to discuss your project requirements and get a personalized quote.
+                  </p>
+                  <button
+                    onClick={() => {
+                      const message = encodeURIComponent("Hi CyJust Deal! I'm interested in a custom website package. Can we discuss my requirements?");
+                      const whatsappUrl = `https://wa.me/2349069246577?text=${message}`;
+                      window.open(whatsappUrl, '_blank');
+                    }}
+                    className="w-full bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-300 active:scale-95"
+                  >
+                    Request Custom Quote
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Process Section */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+              Our Website Building Process
+            </h2>
+            <div className="grid md:grid-cols-4 gap-6">
+              {processSteps.map((process, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-300">{process.step}</span>
+                  </div>
+                  <h3 className="font-bold text-gray-800 dark:text-white mb-2">{process.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{process.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+              Frequently Asked Questions
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {faqs.map((faq, idx) => (
+                <div key={idx} className="bg-white dark:bg-gray-900 rounded-lg p-6">
+                  <h3 className="font-bold text-gray-800 dark:text-white mb-3">{faq.question}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-blue-600 dark:bg-blue-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
+          <p className="text-white/90 max-w-2xl mx-auto mb-8">
+            Contact us today for a free consultation and let's build something amazing together.
+          </p>
+          <button 
+            onClick={() => window.open(`https://wa.me/2349069246577?text=Hello%20CyJust%20Deal!%20I'm%20ready%20to%20start%20my%20website%20project`, '_blank')}
+            className="px-10 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-50 transition-all duration-300 active:scale-95 text-lg"
+          >
+            Start Your Project Now
           </button>
         </div>
       </section>
@@ -1174,6 +1504,7 @@ const Footer = () => {
     { name: 'Products', page: 'products' },
     { name: 'About Us', page: 'about' },
     { name: 'Services', page: 'services' },
+    { name: 'Website Packages', page: 'website-packages' },
     { name: 'Contact', page: 'contact' }
   ];
 
@@ -1326,6 +1657,8 @@ const App = () => {
         return <AboutPage />;
       case 'services':
         return <ServicesPage />;
+      case 'website-packages':
+        return <WebsitePackagesPage />;
       case 'contact':
         return <ContactPage />;
       default:
