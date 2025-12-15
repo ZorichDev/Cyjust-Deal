@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import logo from './img/footer-logo.png';
+import flyersImage2 from './img/10818.jpg';
+import flyersImage from './img/1434.jpg';
+import flyersImage3 from './img/81042-OG0s3j-774.jpg';
+import flyersImage4 from './img/ooad5r0.jpg';
+import flyersImage5 from './img/stationery6_01.jpg';
+import flyersImage6 from './img/mp5-01.jpg';
+import flyersImage7 from './img/730.jpg';
+
 import image1 from './img/1.jpg';
 import image2 from './img/2.jpg';
 import image3 from './img/3.jpg';
@@ -9,14 +17,78 @@ import { Search, Menu, X, Moon, Sun, Package, Truck, Shield, Phone, Mail, MapPin
 
 // Product data
 const featuredProducts = [
-  { id: 1, name: 'Flyers', price: 15999,  discount: 54, image: 'Flyers', rating: 4.8, reviews: 234, inStock: true },
-  { id: 2, name: 'Logo Design', price: 25999,  discount: 42, image: 'Logo Design', rating: 4.6, reviews: 189, inStock: true },
-  { id: 3, name: 'Branding', price: 8999,  discount: 50, image: 'Branding', rating: 4.7, reviews: 456, inStock: true },
-  { id: 4, name: 'Stamp/Seal', price: 12499, discount: 50, image: 'Stamp/Seal', rating: 4.5, reviews: 178, inStock: true },
-  { id: 5, name: 'Card', price: 6999,  discount: 53, image: 'Card', rating: 4.4, reviews: 92, inStock: true },
-  { id: 6, name: 'Package Bag Branding', price: 4999,  discount: 58, image: 'Package Bag Branding', rating: 4.6, reviews: 145, inStock: true },
-  { id: 7, name: 'Dairy Branding', price: 4999,  discount: 58, image: 'Dairy Branding', rating: 4.6, reviews: 145, inStock: true },
-  { id: 8, name: 'Pen Branding', price: 4999,  discount: 58, image: 'Pen Branding', rating: 4.6, reviews: 145, inStock: true },
+  { 
+    id: 1, 
+    name: 'Flyers', 
+    price: 15999, 
+    discount: 54, 
+    image: flyersImage,
+    rating: 4.8, 
+    reviews: 234, 
+    inStock: true 
+  },
+  { 
+    id: 1, 
+    name: 'Logo Design', 
+    price: 15999, 
+    discount: 54, 
+    image: flyersImage2,
+    rating: 4.8, 
+    reviews: 234, 
+    inStock: true 
+  },
+   { 
+    id: 1, 
+    name: 'Branding', 
+    price: 15999, 
+    discount: 54, 
+    image: flyersImage3,
+    rating: 4.8, 
+    reviews: 234, 
+    inStock: true 
+  },
+  { 
+    id: 1, 
+    name: 'Stamp/Seal', 
+    price: 15999, 
+    discount: 54, 
+    image: flyersImage4,
+    rating: 4.8, 
+    reviews: 234, 
+    inStock: true 
+  },
+  { id: 5, name: 'Card', 
+    price: 6999, 
+     discount: 53, 
+     image:flyersImage5 ,
+      rating: 4.4, 
+      reviews: 92,
+       inStock: true },
+  { id: 6,
+     name: 'Package Bag Branding',
+      price: 4999, 
+       discount: 58, 
+      image: flyersImage6, 
+      rating: 4.6, 
+      reviews: 145,
+       inStock: true },
+  { 
+    id: 7,
+     name: 'Dairy Branding',
+      price: 4999, 
+       discount: 58, 
+       image: flyersImage7,
+        rating: 4.6, reviews: 145,
+         inStock: true },
+  {
+     id: 8,
+     name: 'Pen Branding',
+      price: 4999, 
+       discount: 58,
+        image: 'Pen Branding',
+         rating: 4.6, 
+         reviews: 145, 
+         inStock: true },
 ];
 
 const services = [
@@ -69,8 +141,7 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">
                 <Phone className="w-3 h-3" />
-                +23490692465777
-              </span>
+                09069246577              </span>
               <span className="hidden md:flex items-center gap-1">
                 <Mail className="w-3 h-3" />
                 info@cyjustdeal.com
@@ -87,11 +158,11 @@ const Header = ({ currentPage, setCurrentPage, theme, toggleTheme }) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <img src={logo} alt="CyJust Deal Logo"  />
             </div>
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">CyJust Deal</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">CYJUST DEAL</h1>
               <p className="text-xs text-gray-600 dark:text-gray-400">Best Deals Daily</p>
             </div>
           </button>
@@ -199,33 +270,54 @@ const ProductCard = ({ product }) => {
     window.open(`https://wa.me/2349069246577?text=${encodedMessage}`, '_blank');
   };
 
-  return (
+   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] group">
-      <div className="relative bg-gray-50 dark:bg-gray-700 aspect-square flex items-center justify-center">
-        <div className="w-24 h-24 bg-blue-100 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-        <Package className="w-16 h-16 text-gray-400 dark:text-gray-600 absolute" />
+      {/* Image Section - FIXED */}
+      <div className="relative bg-gray-50 dark:bg-gray-700 aspect-square overflow-hidden">
+        {product.image ? (
+          <img 
+            src={product.image} 
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center relative">
+            <div className="w-24 h-24 bg-blue-100 rounded-full opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <Package className="w-16 h-16 text-gray-400 dark:text-gray-600 absolute" />
+          </div>
+        )}
+        
         {product.discount > 0 && (
           <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
             -{product.discount}%
           </div>
         )}
       </div>
+
+      {/* Product Info */}
       <div className="p-4">
         <h3 className="font-semibold text-sm text-gray-800 dark:text-white mb-2 line-clamp-2 min-h-10">
           {product.name}
         </h3>
+        
         <div className="flex items-center gap-1 mb-2">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
           ))}
           <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({product.reviews})</span>
         </div>
+        
         <div className="mb-3">
-          <p className="text-lg font-bold text-blue-600 dark:text-blue-400">₦{product.price.toLocaleString()}</p>
-          {product.originalPrice && (
-            <p className="text-xs text-gray-400 dark:text-gray-500 line-through">₦{product.originalPrice.toLocaleString()}</p>
+          <p className="text-lg font-bold text-blue-600 dark:text-blue-400">
+            ₦{product.price.toLocaleString()}
+          </p>
+          {product.discount > 0 && (
+            <p className="text-xs text-gray-400 dark:text-gray-500 line-through">
+              ₦{Math.round(product.price / (1 - product.discount/100)).toLocaleString()}
+            </p>
           )}
         </div>
+        
         <button 
           onClick={orderOnWhatsApp}
           className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg font-medium transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
@@ -499,10 +591,18 @@ const AboutPage = () => {
             <div className="mb-12">
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Who We Are</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                CyJust Deal is Nigeria's premier online marketplace, dedicated to bringing you the best products at the most competitive prices. Founded in 2020, we have grown to become one of the most trusted e-commerce platforms in the country, serving thousands of satisfied customers.
+                At Cyjust Deal, we are your dedicated partners in digital branding and development, committed to crafting powerful 
+                digital experiences that elevate your brand. Our mission is to empower brands through creative digital solutions, 
+                leveraging our expertise in graphic design, and branding to turn your ideas into impactful digital realities.
+                 Whether you're looking to establish a strong online presence or refresh your brand identity, our team of 
+                 professionals is here to guide you every step of the way. We help you stand out in the digital world with 
+                 custom-tailored services that resonate with your target audience, ensuring your brand not only meets but exceeds 
+                 its digital potential. Choose us for our proven expertise in branding, web development, and design, and let us 
+                 transform your vision into a compelling digital experience..
               </p>
               <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                Our mission is simple: to make quality products accessible to everyone across Nigeria. We carefully curate our product selection, working only with verified suppliers to ensure that every item meets our high standards of quality.
+                our team of professionals is here to guide you every step of the way. Our mission is to help you stand out in the 
+                digital world with creative, custom-tailored services that resonate with your target audience.
               </p>
             </div>
 
@@ -510,10 +610,10 @@ const AboutPage = () => {
               <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">Our Values</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {[
-                  { title: 'Quality First', desc: 'We never compromise on product quality and authenticity.' },
-                  { title: 'Customer Focus', desc: 'Your satisfaction is our top priority in everything we do.' },
-                  { title: 'Transparency', desc: 'Honest pricing, clear policies, and open communication.' },
-                  { title: 'Innovation', desc: 'Continuously improving our service and shopping experience.' }
+                  { title: 'Quality First', desc: 'We never compromise on quality or authenticity. Every project is delivered with precision and excellence.' },
+                  { title: 'Customer Focus', desc: 'Your satisfaction is our top priority. We listen, understand, and create solutions that truly meet your needs.' },
+                  { title: 'Transparency', desc: 'We believe in honest pricing, clear communication, and complete openness throughout every stage of your project.' },
+                  { title: 'Innovation', desc: 'We continuously improve our services, embracing new ideas and technologies to enhance your digital experience.' }
                 ].map((value, index) => (
                   <div key={index} className="flex gap-4">
                     <CheckCircle className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
@@ -592,10 +692,10 @@ const HomePage = () => {
   // Create an array of customer images for the avatars
   // You can replace these with actual customer images or use the product images
   const customerImages = [
-    image1,  // Using existing images for demo
-    image2,
-    image3,
-    image4
+    flyersImage5,  // Using existing images for demo
+    flyersImage2,
+    flyersImage3,
+    flyersImage
   ];
 
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
@@ -892,8 +992,8 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: 'Phone Number',
-      info: '+23490692465777',
-      action: 'tel:+23490692465777'
+      info: '+2349069246577',
+      action: 'tel:+2349069246577'
     },
     {
       icon: Mail,
@@ -1091,7 +1191,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                 <img src={logo} alt="CyJust Deal Logo"  />
               </div>
               <div>
@@ -1154,19 +1254,19 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-6">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-400">+23490692465777</span>
+                <Phone className="w-5 h-5 text-blue-100" />
+                <span className="text-gray-400">+2349069246577</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-blue-400" />
+                <Mail className="w-5 h-5 text-blue-100" />
                 <span className="text-gray-400">info@cyjustdeal.com</span>
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-blue-400" />
+                <MapPin className="w-5 h-5 text-blue-100" />
                 <span className="text-gray-400">Lagos, Nigeria</span>
               </li>
               <li className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-blue-400" />
+                <Clock className="w-5 h-5 text-blue-100" />
                 <span className="text-gray-400">24/7 Customer Support</span>
               </li>
             </ul>
