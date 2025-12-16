@@ -5,7 +5,7 @@ import flyersImage from './img/1434.jpg';
 import flyersImage3 from './img/clos.jpg';
 import flyersImage4 from './img/clas.jpg';
 import flyersImage5 from './img/stationery6_01.jpg';
-import flyersImage6 from './img/mp5-01.jpg';
+import flyersImage6 from './img/cllas.jpg';
 import flyersImage7 from './img/730.jpg';
 import flyersImage8 from './img/close-up-green-pens.jpg';
 
