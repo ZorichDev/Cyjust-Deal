@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from './img/footer-logo.png';
 import flyersImage2 from './img/10818.jpg';
 import flyersImage from './img/1434.jpg';
-import flyersImage3 from './img/81042-OG0s3j-774.jpg';
+import flyersImage3 from './img/clos.jpg';
 import flyersImage4 from './img/ooad5r0.jpg';
 import flyersImage5 from './img/stationery6_01.jpg';
 import flyersImage6 from './img/mp5-01.jpg';
